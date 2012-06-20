@@ -1,0 +1,47 @@
+#include <vector>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+
+using namespace std;
+
+class ContiguousCacheEasy {
+public:
+	int bytesRead(int, int, vector <int>);
+};
+
+int ContiguousCacheEasy::bytesRead(int n, int k, vector <int> addresses) {
+
+	int startPoint = 0;
+	int endPoint = k - 1;
+
+	int totalbytes = 0;
+	for (int i=0; i<addresses.size(); i++) {
+
+		int bytes = 0;
+		if ( addresses[i] < startPoint)	{
+
+			bytes = abs(addresses[i] - startPoint);
+			totalbytes += bytes>k?k:bytes;
+			startPoint = addresses[i];
+			endPoint = startPoint + k -1;
+		}
+		else if (addresses[i] > endPoint){
+
+			bytes = abs(addresses[i] - endPoint);
+			totalbytes += bytes>k?k:bytes;
+			endPoint = addresses[i];
+			startPoint = endPoint - k + 1;
+		}
+	}
+
+	return totalbytes;
+
+}
