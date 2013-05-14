@@ -51,12 +51,12 @@ int BunnyPuzzle::theCount(vector <int> bunnies) {
 	}
 	
 	return result;
-	
 }
 
 
 
 /* solution 2   */
+
 int BunnyPuzzle::theCount(vector <int> bunnies) {
 	int result = 0;
 	int len = int(bunnies.size());
@@ -66,7 +66,19 @@ int BunnyPuzzle::theCount(vector <int> bunnies) {
 		int b = bunnies[i+1];
 		if(i == 0 || i>0 && 2*a-b > bunnies[i-1]) result++;
 		if(i==len-2 || i<len-2 && 2*b-a< bunnies[i+2] ) result++;
-	
 	}	
 	return result;
+}
+
+
+/* solution 3 */
+
+int BunnyPuzzle::theCount(vector<int> bunnies) {
+	int totalCount = 2;
+	
+	for(int i=1; i<int(bunnies.size()) -1; i++) {
+		if(bunnies[i] - bunnies[i-1] != bunnies[i+1] - bunnies[i]) totalCount++;
+	}
+		
+	return totalCount;
 }
